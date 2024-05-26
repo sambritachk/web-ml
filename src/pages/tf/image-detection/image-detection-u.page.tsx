@@ -1,18 +1,21 @@
 import "@tensorflow/tfjs";
-import { load as loadMobileNet, MobileNet } from "@tensorflow-models/mobilenet";
-import {
-  load as loadCocoSsd,
-  ObjectDetection,
-} from "@tensorflow-models/coco-ssd";
+import * as mobileNet from "@tensorflow-models/mobilenet";
+import * as cocoSsd from "@tensorflow-models/coco-ssd";
+// import * as bodySeg from "@tensorflow-models/body-segmentation";
+// import * as deeplab from "@tensorflow-models/deeplab";
+// import * as depthEst from "@tensorflow-models/depth-estimation";
+// import * as faceDetect from "@tensorflow-models/face-detection";
+import "./bs.css";
+
 import { useEffect, useState } from "react";
 
-export type TfImageDetectionPageProps = {
+export type TfImageDetectionUnoptimizedPageProps = {
   className?: string;
 };
 
-export const TfImageDetectionPage = () => {
-  const [cocoSsd, setCocoSsd] = useState<ObjectDetection | null>(null);
-  const [mobileNet, setMobileNet] = useState<MobileNet | null>(null);
+export const TfImageDetectionUnoptimizedPage = () => {
+  const [cocoSsd, setCocoSsd] = useState<cocoSsd.ObjectDetection | null>(null);
+  const [mobileNet, setMobileNet] = useState<mobileNet.MobileNet | null>(null);
   const [modelLoaded, setModelLoaded] = useState<boolean>(false);
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [predictions, setPredictions] = useState<{
@@ -26,14 +29,28 @@ export const TfImageDetectionPage = () => {
   useEffect(() => {
     const loadModel = async () => {
       const [cocoSsdModel, mobilenetModel] = await Promise.all([
-        loadCocoSsd(),
-        loadMobileNet(),
+        cocoSsd?.load(),
+        mobileNet?.load(),
       ]);
-      setCocoSsd(cocoSsdModel);
-      setMobileNet(mobilenetModel);
+      setCocoSsd(cocoSsdModel as any);
+      setMobileNet(mobilenetModel as any);
       setModelLoaded(true);
     };
-
+    try {
+      const dummyRef = async () => {
+        // deeplab.load();
+        // depthEst.createEstimator(depthEst.SupportedModels.ARPortraitDepth);
+        // faceDetect.createDetector(
+        //   faceDetect.SupportedModels.MediaPipeFaceDetector
+        // );
+        // bodySeg.createSegmenter(
+        //   bodySeg.SupportedModels.MediaPipeSelfieSegmentation
+        // );
+      };
+      dummyRef();
+    } catch (error) {
+      console.error(error);
+    }
     loadModel();
   }, []);
 
@@ -109,4 +126,4 @@ export const TfImageDetectionPage = () => {
   );
 };
 
-export default TfImageDetectionPage;
+export default TfImageDetectionUnoptimizedPage;

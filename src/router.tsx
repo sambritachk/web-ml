@@ -5,6 +5,7 @@ import { lazy } from "react";
 import { LazyWrapper } from "@@elements/lazy";
 import { HomePage } from "@@pages/home";
 import { TfImageDetectionPage } from "@@pages/tf/image-detection";
+import { TfImageDetectionUnoptimizedPage } from "@@pages/tf/image-detection";
 
 export type Breadcrumb = {
   title: string;
@@ -37,6 +38,13 @@ const router = createBrowserRouter([
         element: <LazyWrapper children={<TfImageDetectionPage />} />,
         handle: {
           crumb: () => "tf/image-detection",
+        },
+      },
+      {
+        path: "tf/image-detection-u",
+        element: <LazyWrapper children={<TfImageDetectionUnoptimizedPage />} />,
+        handle: {
+          crumb: () => "tf/image-detection-u",
         },
       },
       // {
