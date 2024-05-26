@@ -6,6 +6,7 @@ import * as cocoSsd from "@tensorflow-models/coco-ssd";
 // import * as depthEst from "@tensorflow-models/depth-estimation";
 // import * as faceDetect from "@tensorflow-models/face-detection";
 import "./bs.css";
+import ld from "lodash";
 
 import { useEffect, useState } from "react";
 
@@ -31,6 +32,7 @@ export const TfImageDetectionUnoptimizedPage = () => {
       const [cocoSsdModel, mobilenetModel] = await Promise.all([
         cocoSsd?.load(),
         mobileNet?.load(),
+        ld.add(1, 2),
       ]);
       setCocoSsd(cocoSsdModel as any);
       setMobileNet(mobilenetModel as any);

@@ -6,7 +6,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   optimizeDeps: {
-    exclude: ["*.tsx", "*.js", "*.css"],
+    exclude: ["*.tsx", "*.js", "*.css", "node_modules/*"],
   },
   build: {
     rollupOptions: {},

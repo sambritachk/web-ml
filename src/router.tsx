@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "tf/image-detection-u",
-        element: <LazyWrapper children={<TfImageDetectionUnoptimizedPage />} />,
+        element: <TfImageDetectionUnoptimizedPage />,
         handle: {
           crumb: () => "tf/image-detection-u",
         },
