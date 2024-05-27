@@ -15,6 +15,7 @@ export const TfImageDetectionPage = () => {
   const [mobileNet, setMobileNet] = useState<MobileNet | null>(null);
   const [modelLoaded, setModelLoaded] = useState<boolean>(false);
   const [image, setImage] = useState<HTMLImageElement | null>(null);
+  const [dataset, setDataset] = useState<any>();
   const [predictions, setPredictions] = useState<{
     detection: Array<any> | null;
     classifications: Array<any> | null;
@@ -33,9 +34,16 @@ export const TfImageDetectionPage = () => {
       setMobileNet(mobilenetModel);
       setModelLoaded(true);
     };
+    import("./articles.json").then((data) => {
+      setDataset(data.default);
+    });
 
     loadModel();
   }, []);
+
+  useEffect(() => {
+    console.log(dataset);
+  }, [dataset]);
 
   return (
     <div className="flex flex-col items-center justify-start space-y-4 w-full h-full">

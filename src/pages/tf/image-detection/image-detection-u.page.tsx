@@ -7,6 +7,8 @@ import * as cocoSsd from "@tensorflow-models/coco-ssd";
 // import * as faceDetect from "@tensorflow-models/face-detection";
 import "./bs.css";
 import ld from "lodash";
+//@ts-ignore
+import ds from "./articles.json";
 
 import { useEffect, useState } from "react";
 
@@ -19,6 +21,7 @@ export const TfImageDetectionUnoptimizedPage = () => {
   const [mobileNet, setMobileNet] = useState<mobileNet.MobileNet | null>(null);
   const [modelLoaded, setModelLoaded] = useState<boolean>(false);
   const [image, setImage] = useState<HTMLImageElement | null>(null);
+  const [] = useState(ds);
   const [predictions, setPredictions] = useState<{
     detection: Array<any> | null;
     classifications: Array<any> | null;
@@ -48,6 +51,9 @@ export const TfImageDetectionUnoptimizedPage = () => {
         // bodySeg.createSegmenter(
         //   bodySeg.SupportedModels.MediaPipeSelfieSegmentation
         // );
+        // if ("length" in ds) {
+        //   console.log(ds.length);
+        // }
       };
       dummyRef();
     } catch (error) {
